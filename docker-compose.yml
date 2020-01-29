@@ -16,6 +16,9 @@ services:
     volumes:
       - ./public:/public
       - ./vendor:/www/vendor
+      - ./src:/www/src
       - ./composer.json:/www/composer.json
     environment:
-      - vendor_path=/www/vendor/
+      - VENDOR_PATH=/www/vendor/
+    env_file:
+      - .env
