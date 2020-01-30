@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <title>Test 2</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <h1>Policy Calculator</h1>
+
+    <form>
+        <div class="form-group">
+            <label for="carValue">Estimated value of the car (100 - 100 000 EUR)</label>
+            <input type="number" class="form-control" id="carValue"
+                   placeholder="Estimated value of the car">
+        </div>
+        <div class="form-group">
+            <label for="tax">Tax percentage (0 - 100%)</label>
+            <input type="number" class="form-control" id="tax" placeholder="Tax percentage">
+        </div>
+        <div class="form-group">
+            <label for="numberOfInstallments">Number of instalments</label>
+            <select id="numberOfInstallments" class="form-control"></select>
+        </div>
+        <button type="button" class="btn btn-primary" id="calculate">Calculate</button>
+    </form>
+
+    <hr>
+
+    <table class="table" id="resultTable"></table>
+</div>
+
+<script>
+  $(function () {
+    var $select = $("#numberOfInstallments");
+    for (i = 1; i <= 12; i++) {
+      $select.append($('<option></option>').val(i).html(i))
+    }
+
+    $('#calculate').click(function () {
+      $('#resultTable').html('');
+      $.get({
+        url: "/Test2.php",
+        data: {
+          'carValue': $('#carValue').val(),
+          'tax': $('#tax').val(),
+          'numberOfInstallments': $('#numberOfInstallments').val()
+        },
+        success: function (data) {
+          $('#resultTable').html('<thead class="thead-light">\n' +
+            '        <tr id="headTr">\n' +
+            '            <th scope="col"></th>\n' +
+            '            <th scope="col">Policy</th>\n' +
+            '        </tr>\n' +
+            '        </thead>\n' +
+            '        <tbody id="resultTBody">\n' +
+            '        <tr>\n' +
+            '            <td>Car value</td>\n' +
+            '            <td>' + data['Value'] + '</td>\n' +
+            '        </tr>\n' +
+            '        </tbody>');
+
+          let i = 0;
+          for (let installment in data['installments']) {
+            i++;
+            $('#headTr').append('<th scope="col">' + i + ' instalment</th>');
+          }
+
+          for (let title in data['invoices']) {
+            let price = data['invoices'][title];
+            let tr = $('<tr><td>' + title + '</td><td>' + price + '</td></tr>');
+
+            for (let installment in data['installments']) {
+              let installmentPrice = data['installments'][installment][title];
+              tr.append('<td>' + installmentPrice + '</td>')
+            }
+            $('#resultTBody').append(tr);
+          }
+
+          $('#resultTable').find('tr:last td').css('font-weight', 'bold');
+        }
+      });
+    });
+  })
+</script>
+</body>
+</html>
