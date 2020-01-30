@@ -15,23 +15,41 @@ class PolicyDecorator
      */
     public function rawArray(Invoice $invoice, array $installments)
     {
-        $result = [];
-        $result['invoice'] = [
-            'commodityValue' => $invoice->getCommodityValue(),
-            'basePrice' => $invoice->getBasePrice(),
-            'commission' => $invoice->getCommission(),
-            'tax' => $invoice->getTax(),
-            'total' => $invoice->getTotal(),
+        $result = [
+            'Value' => $this->formatPrice($invoice->getCommodityValue()),
         ];
-        foreach ($installments as $installment) {
-            $result['installments'][] = [
-                'basePrice' => $installment->getBasePrice(),
-                'commission' => $installment->getCommission(),
-                'tax' => $installment->getTax(),
-                'total' => $installment->getTotal(),
-            ];
+        $basePriceKey = 'Base Premium (' . $invoice->getBaseRate() . '%)';
+        $commissionKey = 'Commission (' . $invoice->getCommissionRate() . '%)';
+        $taxKey = 'Tax (' . $invoice->getTaxRate() . '%)';
+        $totalKey = 'Total cost';
+
+        $result['invoices'] = [
+            $basePriceKey => $this->formatPrice($invoice->getBasePrice()),
+            $commissionKey => $this->formatPrice($invoice->getCommission()),
+            $taxKey => $this->formatPrice($invoice->getTax()),
+            $totalKey => $this->formatPrice($invoice->getTotal()),
+        ];
+
+        if (count($installments) > 1) {
+            foreach ($installments as $installment) {
+                $result['installments'][] = [
+                    $basePriceKey => $this->formatPrice($installment->getBasePrice()),
+                    $commissionKey => $this->formatPrice($installment->getCommission()),
+                    $taxKey => $this->formatPrice($installment->getTax()),
+                    $totalKey => $this->formatPrice($installment->getTotal()),
+                ];
+            }
         }
 
         return $result;
+    }
+
+    /**
+     * @param $price
+     * @return string
+     */
+    public function formatPrice($price)
+    {
+        return number_format($price, 2, '.', '');
     }
 }
