@@ -50,4 +50,26 @@ class Invoice extends BaseInvoice
     {
         $this->taxRate = $taxRate;
     }
+
+    /**
+     * @return float|int
+     */
+    public function getBaseRate()
+    {
+        if (!$this->getCommodityValue()) {
+            return 0;
+        }
+        return (100 * $this->getBasePrice()) / $this->getCommodityValue();
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getCommissionRate()
+    {
+        if (!$this->getBasePrice()) {
+            return 0;
+        }
+        return (100 * $this->getCommission()) / $this->getBasePrice();
+    }
 }
