@@ -2,6 +2,12 @@
 
 namespace App\Entity;
 
+/**
+ * This class created for using in Invoice and Installment.
+ *
+ * Class BaseInvoice
+ * @package App\Entity
+ */
 abstract class BaseInvoice
 {
     protected float $basePrice;
@@ -59,6 +65,8 @@ abstract class BaseInvoice
     }
 
     /**
+     * Calculate sum of the invoice.
+     *
      * @return float
      */
     public function getTotal(): float

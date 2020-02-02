@@ -2,10 +2,17 @@
 
 namespace App\PolicyService;
 
+/**
+ * Class BasePolicyRateStrategy
+ * @package App\PolicyService
+ */
 class BasePolicyRateStrategy
 {
 
     /**
+     * Get the percent of base policy,
+     * By default it will get from the env variables.
+     *
      * @param int $timestamp
      * @return int
      */

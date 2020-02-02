@@ -2,10 +2,22 @@
 
 namespace App\Entity;
 
+/**
+ * Class Invoice
+ * @package App\Entity
+ */
 class Invoice extends BaseInvoice
 {
+    /**
+     * This commodity value in this case we use it as car Value.
+     *
+     * @var float
+     */
     protected float $commodityValue;
 
+    /**
+     * @var float
+     */
     protected float $taxRate;
 
     /**
@@ -52,6 +64,8 @@ class Invoice extends BaseInvoice
     }
 
     /**
+     * Calculate base rate from existing invoice.
+     *
      * @return float|int
      */
     public function getBaseRate()
@@ -63,6 +77,8 @@ class Invoice extends BaseInvoice
     }
 
     /**
+     * Calculate commission rate from existing invoice.
+     *
      * @return float|int
      */
     public function getCommissionRate()

@@ -5,6 +5,12 @@ namespace App\PolicyService\PolicyCalculator;
 use App\Entity\Invoice;
 use App\PolicyService\PolicyCalculatorInterface;
 
+/**
+ * This class calculate commission price of policy.
+ *
+ * Class CommissionPolicyCalculator
+ * @package App\PolicyService\PolicyCalculator
+ */
 class CommissionPolicyCalculator implements PolicyCalculatorInterface
 {
 

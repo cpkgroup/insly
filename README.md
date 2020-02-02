@@ -35,5 +35,9 @@ docker-compose up -d
 - Docker
 - PHP 7.4.2
 
+## TODOs
+- Add validation class for check validity of data
+- Create unit test and functional tests
+
 ## Author
 - [Mohamad Habibi](https://www.linkedin.com/in/habibimh) 

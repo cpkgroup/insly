@@ -5,6 +5,12 @@ namespace App\PolicyService\PolicyCalculator;
 use App\Entity\Invoice;
 use App\PolicyService\PolicyCalculatorInterface;
 
+/**
+ * This class calculate tax price of policy.
+ *
+ * Class TaxPolicyCalculator
+ * @package App\PolicyService\PolicyCalculator
+ */
 class TaxPolicyCalculator implements PolicyCalculatorInterface
 {
 

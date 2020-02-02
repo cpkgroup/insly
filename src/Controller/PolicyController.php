@@ -11,6 +11,12 @@ use App\PolicyService\InstallmentCalculator;
 use App\Entity\Invoice;
 use App\PolicyService\PolicyDecorator;
 
+/**
+ * This is the main class for getting calculated data as json.
+ *
+ * Class PolicyController
+ * @package App\Controller
+ */
 class PolicyController
 {
 

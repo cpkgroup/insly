@@ -5,9 +5,15 @@ namespace App\PolicyService;
 use App\Entity\Installment;
 use App\Entity\Invoice;
 
+/**
+ * Class PolicyDecorator
+ * @package App\PolicyService
+ */
 class PolicyDecorator
 {
     /**
+     * Decorate required data for using in html as json.
+     *
      * @param Invoice $invoice
      * @param Installment[] $installments
      *

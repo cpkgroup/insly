@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
-
+/**
+ * Class Installment
+ * @package App\Entity
+ */
 class Installment extends BaseInvoice
 {
     /**
